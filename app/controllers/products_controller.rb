@@ -5,7 +5,8 @@ class ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.page(params[:page]).per(10)
+    @q = Product.ransack(params[:q])
+    @products = @q.result(:distinct => true).includes(:giver, :category, :age_group).page(params[:page]).per(10)
     @location_hash = Gmaps4rails.build_markers(@products.where.not(:location_latitude => nil)) do |product, marker|
       marker.lat product.location_latitude
       marker.lng product.location_longitude

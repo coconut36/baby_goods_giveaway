@@ -3,7 +3,8 @@ class UserAgesController < ApplicationController
 
   # GET /user_ages
   def index
-    @user_ages = UserAge.page(params[:page]).per(10)
+    @q = UserAge.ransack(params[:q])
+    @user_ages = @q.result(:distinct => true).includes(:products).page(params[:page]).per(10)
   end
 
   # GET /user_ages/1
