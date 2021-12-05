@@ -2,8 +2,8 @@ class UserAge < ApplicationRecord
   # Direct associations
 
   has_many   :products,
-             :foreign_key => "age_id",
-             :dependent => :destroy
+             foreign_key: "age_id",
+             dependent: :destroy
 
   # Indirect associations
 
@@ -14,5 +14,4 @@ class UserAge < ApplicationRecord
   def to_s
     age_range
   end
-
 end

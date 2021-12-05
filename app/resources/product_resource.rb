@@ -23,5 +23,4 @@ class ProductResource < ApplicationResource
              resource: UserResource
 
   # Indirect associations
-
 end

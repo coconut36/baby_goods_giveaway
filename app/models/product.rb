@@ -1,10 +1,10 @@
-require 'open-uri'
+require "open-uri"
 class Product < ApplicationRecord
   before_validation :geocode_location
 
   def geocode_location
-    if self.location.present?
-      url = "https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV['GMAP_API_KEY']}&address=#{URI.encode(self.location)}"
+    if location.present?
+      url = "https://maps.googleapis.com/maps/api/geocode/json?key=#{ENV['GMAP_API_KEY']}&address=#{URI.encode(location)}"
 
       raw_data = open(url).read
 
@@ -21,18 +21,18 @@ class Product < ApplicationRecord
   end
   mount_uploader :image, ImageUploader
 
-  enum gender: {"boys"=>0, "girls"=>1, "unisex"=>2} 
+  enum gender: { "boys" => 0, "girls" => 1, "unisex" => 2 }
 
   # Direct associations
 
   belongs_to :age_group,
-             :class_name => "UserAge",
-             :foreign_key => "age_id"
+             class_name: "UserAge",
+             foreign_key: "age_id"
 
   belongs_to :category
 
   belongs_to :giver,
-             :class_name => "User"
+             class_name: "User"
 
   # Indirect associations
 
@@ -43,5 +43,4 @@ class Product < ApplicationRecord
   def to_s
     giver.to_s
   end
-
 end

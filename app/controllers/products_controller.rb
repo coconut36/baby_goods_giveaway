@@ -1,13 +1,15 @@
 class ProductsController < ApplicationController
-  before_action :current_user_must_be_product_giver, only: [:edit, :update, :destroy] 
+  before_action :current_user_must_be_product_giver,
+                only: %i[edit update destroy]
 
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result(:distinct => true).includes(:giver, :category, :age_group).page(params[:page]).per(10)
-    @location_hash = Gmaps4rails.build_markers(@products.where.not(:location_latitude => nil)) do |product, marker|
+    @products = @q.result(distinct: true).includes(:giver, :category,
+                                                   :age_group).page(params[:page]).per(10)
+    @location_hash = Gmaps4rails.build_markers(@products.where.not(location_latitude: nil)) do |product, marker|
       marker.lat product.location_latitude
       marker.lng product.location_longitude
       marker.infowindow "<h5><a href='/products/#{product.id}'>#{product.giver_id}</a></h5><small>#{product.location_formatted_address}</small>"
@@ -15,8 +17,7 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1
-  def show
-  end
+  def show; end
 
   # GET /products/new
   def new
@@ -24,17 +25,16 @@ class ProductsController < ApplicationController
   end
 
   # GET /products/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /products
   def create
     @product = Product.new(product_params)
 
     if @product.save
-      message = 'Product was successfully created.'
-      if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-        redirect_back fallback_location: request.referrer, notice: message
+      message = "Product was successfully created."
+      if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+        redirect_back fallback_location: request.referer, notice: message
       else
         redirect_to @product, notice: message
       end
@@ -46,7 +46,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   def update
     if @product.update(product_params)
-      redirect_to @product, notice: 'Product was successfully updated.'
+      redirect_to @product, notice: "Product was successfully updated."
     else
       render :edit
     end
@@ -56,30 +56,31 @@ class ProductsController < ApplicationController
   def destroy
     @product.destroy
     message = "Product was successfully deleted."
-    if Rails.application.routes.recognize_path(request.referrer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
-      redirect_back fallback_location: request.referrer, notice: message
+    if Rails.application.routes.recognize_path(request.referer)[:controller] != Rails.application.routes.recognize_path(request.path)[:controller]
+      redirect_back fallback_location: request.referer, notice: message
     else
       redirect_to products_url, notice: message
     end
   end
-
 
   private
 
   def current_user_must_be_product_giver
     set_product
     unless current_user == @product.giver
-      redirect_back fallback_location: root_path, alert: "You are not authorized for that."
+      redirect_back fallback_location: root_path,
+                    alert: "You are not authorized for that."
     end
   end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def product_params
-      params.require(:product).permit(:giver_id, :name, :description, :age_id, :category_id, :gender, :image, :location)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def product_params
+    params.require(:product).permit(:giver_id, :name, :description, :age_id,
+                                    :category_id, :gender, :image, :location)
+  end
 end

@@ -13,7 +13,7 @@ class Api::V1::UserAgesController < Api::V1::GraphitiController
     user_age = UserAgeResource.build(params)
 
     if user_age.save
-      render jsonapi: user_age, status: 201
+      render jsonapi: user_age, status: :created
     else
       render jsonapi_errors: user_age
     end
@@ -33,7 +33,7 @@ class Api::V1::UserAgesController < Api::V1::GraphitiController
     user_age = UserAgeResource.find(params)
 
     if user_age.destroy
-      render jsonapi: { meta: {} }, status: 200
+      render jsonapi: { meta: {} }, status: :ok
     else
       render jsonapi_errors: user_age
     end

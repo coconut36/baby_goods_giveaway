@@ -12,5 +12,4 @@ class UserResource < ApplicationResource
              foreign_key: :giver_id
 
   # Indirect associations
-
 end

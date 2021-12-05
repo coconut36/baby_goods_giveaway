@@ -10,5 +10,4 @@ class UserAgeResource < ApplicationResource
              foreign_key: :age_id
 
   # Indirect associations
-
 end

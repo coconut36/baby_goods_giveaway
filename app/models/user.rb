@@ -1,11 +1,10 @@
 class User < ApplicationRecord
-  
   include JwtToken
-# Direct associations
+  # Direct associations
 
   has_many   :products,
-             :foreign_key => "giver_id",
-             :dependent => :destroy
+             foreign_key: "giver_id",
+             dependent: :destroy
 
   # Indirect associations
 

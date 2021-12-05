@@ -1,10 +1,10 @@
 class UserAgesController < ApplicationController
-  before_action :set_user_age, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_age, only: %i[show edit update destroy]
 
   # GET /user_ages
   def index
     @q = UserAge.ransack(params[:q])
-    @user_ages = @q.result(:distinct => true).includes(:products).page(params[:page]).per(10)
+    @user_ages = @q.result(distinct: true).includes(:products).page(params[:page]).per(10)
   end
 
   # GET /user_ages/1
@@ -18,15 +18,14 @@ class UserAgesController < ApplicationController
   end
 
   # GET /user_ages/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /user_ages
   def create
     @user_age = UserAge.new(user_age_params)
 
     if @user_age.save
-      redirect_to @user_age, notice: 'User age was successfully created.'
+      redirect_to @user_age, notice: "User age was successfully created."
     else
       render :new
     end
@@ -35,7 +34,7 @@ class UserAgesController < ApplicationController
   # PATCH/PUT /user_ages/1
   def update
     if @user_age.update(user_age_params)
-      redirect_to @user_age, notice: 'User age was successfully updated.'
+      redirect_to @user_age, notice: "User age was successfully updated."
     else
       render :edit
     end
@@ -44,17 +43,18 @@ class UserAgesController < ApplicationController
   # DELETE /user_ages/1
   def destroy
     @user_age.destroy
-    redirect_to user_ages_url, notice: 'User age was successfully destroyed.'
+    redirect_to user_ages_url, notice: "User age was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user_age
-      @user_age = UserAge.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def user_age_params
-      params.require(:user_age).permit(:age_range)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user_age
+    @user_age = UserAge.find(params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def user_age_params
+    params.require(:user_age).permit(:age_range)
+  end
 end
