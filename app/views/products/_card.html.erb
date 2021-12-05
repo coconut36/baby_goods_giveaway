@@ -7,7 +7,11 @@
     <dl class="mb-1">
       <dt>Giver</dt>
       <!-- Display giver_id start -->
-      <dd><%= product.giver_id %></dd>
+      <dd>
+        <% if @product.giver.present? %>
+          <%= link_to product.giver, product.giver %>
+        <% end %>
+      </dd>
       <!-- Display giver_id end -->
 
       <dt>Name</dt>
@@ -22,12 +26,20 @@
 
       <dt>Age</dt>
       <!-- Display age_id start -->
-      <dd><%= product.age_id %></dd>
+      <dd>
+        <% if @product.age_group.present? %>
+          <%= link_to product.age_group, product.age_group %>
+        <% end %>
+      </dd>
       <!-- Display age_id end -->
 
       <dt>Category</dt>
       <!-- Display category_id start -->
-      <dd><%= product.category_id %></dd>
+      <dd>
+        <% if @product.category.present? %>
+          <%= link_to product.category, product.category %>
+        <% end %>
+      </dd>
       <!-- Display category_id end -->
 
       <dt>Gender</dt>
