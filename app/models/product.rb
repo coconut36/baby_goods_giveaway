@@ -3,6 +3,8 @@ class Product < ApplicationRecord
 
   # Direct associations
 
+  belongs_to :category
+
   belongs_to :giver,
              :class_name => "User"
 
