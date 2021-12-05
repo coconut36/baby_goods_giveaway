@@ -3,7 +3,7 @@ class UserAgesController < ApplicationController
 
   # GET /user_ages
   def index
-    @user_ages = UserAge.all
+    @user_ages = UserAge.page(params[:page]).per(10)
   end
 
   # GET /user_ages/1
