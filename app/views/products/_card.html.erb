@@ -44,7 +44,11 @@
 
       <dt>Location</dt>
       <!-- Display location start -->
-      <dd><%= product.location %></dd>
+      <dd>
+        <div>
+          <%= render partial: "products/one_photo_map" %>
+        </div>
+      </dd>
       <!-- Display location end -->
 
     </dl>
