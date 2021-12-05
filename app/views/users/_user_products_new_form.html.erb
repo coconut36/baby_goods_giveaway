@@ -32,7 +32,7 @@
     <%= f.label :age_id %>
 
     <!-- Input for age_id start -->
-    <%= f.text_field :age_id, class: "form-control" %>
+    <%= f.collection_select :age_id, UserAge.all, :id, :to_s, {}, class: "form-control" %>
     <!-- Input for age_id end -->
   </div>
   <!-- Label and input for age_id end -->

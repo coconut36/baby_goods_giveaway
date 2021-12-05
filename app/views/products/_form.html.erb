@@ -94,7 +94,7 @@
 
     <%= f.label :age_id %>
     <!-- Input for age_id start -->
-    <%= f.number_field :age_id, class: age_class, placeholder: "Enter age" %>
+    <%= f.collection_select :age_id, UserAge.all, :id, :to_s, {}, class: "form-control" %>
     <!-- Input for age_id end -->
     <% if age_was_invalid %>
       <% product.errors.full_messages_for(:age).each do |message| %>
