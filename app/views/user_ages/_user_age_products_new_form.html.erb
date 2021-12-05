@@ -3,13 +3,9 @@
 <!-- Form product end -->
 
   <!-- Label and input for giver_id start -->
-  <div class="form-group">
-    <%= f.label :giver_id %>
-
-    <!-- Input for giver_id start -->
-    <%= f.collection_select :giver_id, User.all, :id, :to_s, {}, class: "form-control" %>
-    <!-- Input for giver_id end -->
-  </div>
+  <!-- Input for "giver_id" start -->
+  <%= f.hidden_field :giver_id, value: current_user.id %>
+  <!-- Input for "giver_id" end -->
   <!-- Label and input for giver_id end -->
 
   <!-- Label and input for name start -->
