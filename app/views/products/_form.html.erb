@@ -16,7 +16,7 @@
 
     <%= f.label :giver_id %>
     <!-- Input for giver_id start -->
-    <%= f.number_field :giver_id, class: giver_class, placeholder: "Enter giver" %>
+    <%= f.collection_select :giver_id, User.all, :id, :to_s, {}, class: "form-control" %>
     <!-- Input for giver_id end -->
     <% if giver_was_invalid %>
       <% product.errors.full_messages_for(:giver).each do |message| %>
