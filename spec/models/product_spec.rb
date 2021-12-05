@@ -4,6 +4,8 @@ RSpec.describe Product, type: :model do
   
     describe "Direct Associations" do
 
+    it { should belong_to(:age_group) }
+
     it { should belong_to(:category) }
 
     it { should belong_to(:giver) }

@@ -3,6 +3,10 @@ class Product < ApplicationRecord
 
   # Direct associations
 
+  belongs_to :age_group,
+             :class_name => "UserAge",
+             :foreign_key => "age_id"
+
   belongs_to :category
 
   belongs_to :giver,
