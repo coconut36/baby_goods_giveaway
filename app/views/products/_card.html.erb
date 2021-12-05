@@ -56,16 +56,20 @@
 
       <!-- Edit link product start -->
       <div class="col">
-        <%= link_to edit_product_url(product), class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-edit"></i>
+        <% if current_user == @product.giver %>
+          <%= link_to edit_product_url(product), class: "btn btn-block btn-sm btn-outline-secondary" do %>
+            <i class="fas fa-edit"></i>
+          <% end %>
         <% end %>
       </div>
       <!-- Edit link product end -->
 
       <!-- Delete link product start -->
       <div class="col">
-        <%= link_to product, method: :delete, data: { confirm: "Do you really want to delete this product?" }, class: "btn btn-block btn-outline-secondary" do %>
-          <i class="fas fa-trash-alt"></i>
+        <% if current_user == @product.giver %>
+          <%= link_to product, method: :delete, data: { confirm: "Do you really want to delete this product?" }, class: "btn btn-block btn-outline-secondary" do %>
+            <i class="fas fa-trash-alt"></i>
+          <% end %>
         <% end %>
       </div>
       <!-- Delete link product end -->

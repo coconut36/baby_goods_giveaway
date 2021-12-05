@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  before_action :current_user_must_be_product_giver, only: [:edit, :update, :destroy] 
+
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
@@ -57,6 +59,14 @@ class ProductsController < ApplicationController
 
 
   private
+
+  def current_user_must_be_product_giver
+    set_product
+    unless current_user == @product.giver
+      redirect_back fallback_location: root_path, alert: "You are not authorized for that."
+    end
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_product
       @product = Product.find(params[:id])
