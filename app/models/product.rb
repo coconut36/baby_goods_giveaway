@@ -3,6 +3,9 @@ class Product < ApplicationRecord
 
   # Direct associations
 
+  belongs_to :giver,
+             :class_name => "User"
+
   # Indirect associations
 
   # Validations
