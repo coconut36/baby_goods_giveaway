@@ -52,7 +52,7 @@
     <%= f.label :gender %>
 
     <!-- Input for gender start -->
-    <%= f.text_field :gender, class: "form-control" %>
+    <%= f.select :gender, options_for_select(Product.genders.keys), {}, class: "form-control" %>
     <!-- Input for gender end -->
   </div>
   <!-- Label and input for gender end -->
