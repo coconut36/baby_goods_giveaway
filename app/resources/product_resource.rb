@@ -13,6 +13,10 @@ class ProductResource < ApplicationResource
 
   # Direct associations
 
+  belongs_to :age_group,
+             resource: UserAgeResource,
+             foreign_key: :age_id
+
   belongs_to :category
 
   belongs_to :giver,
