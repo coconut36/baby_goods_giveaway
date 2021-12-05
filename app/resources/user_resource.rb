@@ -8,6 +8,9 @@ class UserResource < ApplicationResource
 
   # Direct associations
 
+  has_many   :products,
+             foreign_key: :giver_id
+
   # Indirect associations
 
 end

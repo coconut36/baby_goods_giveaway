@@ -13,6 +13,9 @@ class ProductResource < ApplicationResource
 
   # Direct associations
 
+  belongs_to :giver,
+             resource: UserResource
+
   # Indirect associations
 
 end
