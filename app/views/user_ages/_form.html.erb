@@ -1,7 +1,6 @@
 <% was_validated = user_age.errors.any? %>
 
 <%= form_with(model: user_age, local: true, novalidate: true, class: "mb-3") do |f| %>
-  <!-- Label and input for age_range start -->
   <div class="form-group">
     <% age_range_class = "form-control" %>
     <% age_range_was_invalid = user_age.errors.include?(:age_range) %>
@@ -15,9 +14,7 @@
     <% end %>
 
     <%= f.label :age_range %>
-    <!-- Input for age_range start -->
     <%= f.text_field :age_range, class: age_range_class, placeholder: "Enter age range" %>
-    <!-- Input for age_range end -->
     <% if age_range_was_invalid %>
       <% user_age.errors.full_messages_for(:age_range).each do |message| %>
         <div class="invalid-feedback d-flex">
@@ -26,6 +23,5 @@
       <% end %>
     <% end %>
   </div>
-  <!-- Label and input for age_range end -->
   <%= f.button class: "btn btn-outline-secondary btn-block" %>
 <% end %>

@@ -6,62 +6,46 @@
   <div class="card-body">
     <dl class="mb-1">
       <dt>Giver</dt>
-      <!-- Display giver_id start -->
       <dd>
         <% if @product.giver.present? %>
           <%= link_to product.giver, product.giver %>
         <% end %>
       </dd>
-      <!-- Display giver_id end -->
 
       <dt>Name</dt>
-      <!-- Display name start -->
       <dd><%= product.name %></dd>
-      <!-- Display name end -->
 
       <dt>Description</dt>
-      <!-- Display description start -->
       <dd><%= product.description %></dd>
-      <!-- Display description end -->
 
       <dt>Age</dt>
-      <!-- Display age_id start -->
       <dd>
         <% if @product.age_group.present? %>
           <%= link_to product.age_group, product.age_group %>
         <% end %>
       </dd>
-      <!-- Display age_id end -->
 
       <dt>Category</dt>
-      <!-- Display category_id start -->
       <dd>
         <% if @product.category.present? %>
           <%= link_to product.category, product.category %>
         <% end %>
       </dd>
-      <!-- Display category_id end -->
 
       <dt>Gender</dt>
-      <!-- Display gender start -->
       <dd><%= product.gender %></dd>
-      <!-- Display gender end -->
 
       <dt>Image</dt>
-      <!-- Display image start -->
       <dd>
         <%= cl_image_tag @product.image, class: "img-fluid" %>
       </dd>
-      <!-- Display image end -->
 
       <dt>Location</dt>
-      <!-- Display location start -->
       <dd>
         <div>
           <%= render partial: "products/one_photo_map" %>
         </div>
       </dd>
-      <!-- Display location end -->
 
     </dl>
 
@@ -70,7 +54,6 @@
         <%= link_to_show_or_back product, '<i class="fas fa-search-plus"></i>'.html_safe, '<i class="fas fa-chevron-left"></i>'.html_safe, class: "btn btn-block btn-outline-secondary" %>
       </div>
 
-      <!-- Edit link product start -->
       <div class="col">
         <% if current_user == @product.giver %>
           <%= link_to edit_product_url(product), class: "btn btn-block btn-sm btn-outline-secondary" do %>
@@ -78,9 +61,7 @@
           <% end %>
         <% end %>
       </div>
-      <!-- Edit link product end -->
 
-      <!-- Delete link product start -->
       <div class="col">
         <% if current_user == @product.giver %>
           <%= link_to product, method: :delete, data: { confirm: "Do you really want to delete this product?" }, class: "btn btn-block btn-outline-secondary" do %>
@@ -88,7 +69,6 @@
           <% end %>
         <% end %>
       </div>
-      <!-- Delete link product end -->
     </div>
   </div>
 
