@@ -8,6 +8,7 @@ class UserAgesController < ApplicationController
 
   # GET /user_ages/1
   def show
+    @product = Product.new
   end
 
   # GET /user_ages/new

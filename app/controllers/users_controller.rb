@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
+    @product = Product.new
   end
 
   # GET /users/new
