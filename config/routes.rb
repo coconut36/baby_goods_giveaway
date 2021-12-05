@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_ages
   resources :categories
   resources :products
   devise_for :users
