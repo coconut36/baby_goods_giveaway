@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "products#index"
   resources :user_ages
   resources :categories
   resources :products
