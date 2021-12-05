@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  mount_uploader :image, ImageUploader
+
   enum gender: {"boys"=>0, "girls"=>1, "unisex"=>2} 
 
   # Direct associations
