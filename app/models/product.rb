@@ -31,6 +31,9 @@ class Product < ApplicationRecord
 
   belongs_to :category
 
+  has_many   :messages,
+             dependent: :destroy
+
   belongs_to :giver,
              class_name: "User"
 

@@ -6,15 +6,17 @@ class ProductsController < ApplicationController
 
   def index
     @q = Product.ransack(params[:q])
-    @products = @q.result(distinct: true).includes(:giver, :category,
-                                                   :age_group).page(params[:page]).per(10)
+    @products = @q.result(distinct: true).includes(:giver, :messages,
+                                                   :category, :age_group).page(params[:page]).per(10)
     @location_hash = Gmaps4rails.build_markers(@products.where.not(location_latitude: nil)) do |product, marker|
       marker.lat product.location_latitude
       marker.lng product.location_longitude
     end
   end
 
-  def show; end
+  def show
+    @message = Message.new
+  end
 
   def new
     @product = Product.new

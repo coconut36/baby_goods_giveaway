@@ -19,6 +19,8 @@ class ProductResource < ApplicationResource
 
   belongs_to :category
 
+  has_many   :messages
+
   belongs_to :giver,
              resource: UserResource
 
