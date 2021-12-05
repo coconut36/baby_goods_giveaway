@@ -1,26 +1,21 @@
 class UserAgesController < ApplicationController
   before_action :set_user_age, only: %i[show edit update destroy]
 
-  # GET /user_ages
   def index
     @q = UserAge.ransack(params[:q])
     @user_ages = @q.result(distinct: true).includes(:products).page(params[:page]).per(10)
   end
 
-  # GET /user_ages/1
   def show
     @product = Product.new
   end
 
-  # GET /user_ages/new
   def new
     @user_age = UserAge.new
   end
 
-  # GET /user_ages/1/edit
   def edit; end
 
-  # POST /user_ages
   def create
     @user_age = UserAge.new(user_age_params)
 
@@ -31,7 +26,6 @@ class UserAgesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /user_ages/1
   def update
     if @user_age.update(user_age_params)
       redirect_to @user_age, notice: "User age was successfully updated."
@@ -40,7 +34,6 @@ class UserAgesController < ApplicationController
     end
   end
 
-  # DELETE /user_ages/1
   def destroy
     @user_age.destroy
     redirect_to user_ages_url, notice: "User age was successfully destroyed."
@@ -48,12 +41,10 @@ class UserAgesController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_user_age
     @user_age = UserAge.find(params[:id])
   end
 
-  # Only allow a trusted parameter "white list" through.
   def user_age_params
     params.require(:user_age).permit(:age_range)
   end
