@@ -1,4 +1,4 @@
-# BabyGoodsMarketplace2
+# BabyGoodsGiveaway
 
 ## Cloudinary Setup
 
