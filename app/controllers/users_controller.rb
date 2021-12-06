@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @message = Message.new
     @product = Product.new
   end
 

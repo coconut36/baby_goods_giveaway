@@ -1,0 +1,51 @@
+<% was_validated = message.errors.any? %>
+
+<%= form_with(model: message, local: true, novalidate: true, class: "mb-3") do |f| %>
+  <%= f.hidden_field :sender_id, value: current_user.id %>
+  <div class="form-group">
+    <% text_class = "form-control" %>
+    <% text_was_invalid = message.errors.include?(:text) %>
+
+    <% if was_validated %>
+      <% if text_was_invalid %>
+        <% text_class << " is-invalid" %>
+      <% else %>
+        <% text_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :text %>
+    <%= f.text_area :text, class: text_class, placeholder: "Enter text" %>
+    <% if text_was_invalid %>
+      <% message.errors.full_messages_for(:text).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <% product_class = "form-control" %>
+    <% product_was_invalid = message.errors.include?(:product) %>
+
+    <% if was_validated %>
+      <% if product_was_invalid %>
+        <% product_class << " is-invalid" %>
+      <% else %>
+        <% product_class << " is-valid" %>
+      <% end %>
+    <% end %>
+
+    <%= f.label :product_id %>
+    <%= f.collection_select :product_id, Product.all, :id, :to_s, {}, class: "form-control" %>
+    <% if product_was_invalid %>
+      <% message.errors.full_messages_for(:product).each do |message| %>
+        <div class="invalid-feedback d-flex">
+          <%= message %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <%= f.hidden_field :recipient_id, value: current_user.id %>
+  <%= f.button class: "btn btn-outline-secondary btn-block" %>
+<% end %>
